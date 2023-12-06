@@ -4,5 +4,4 @@
 - i18next
 - react-router
 - tailwindcss
-- tailwindcss
-- mdi icons from @iconify
+- @iconify | mdi icons library 
