@@ -1,4 +1,4 @@
-#React Start Project with TypeScript
+# React Start Project with TypeScript
 ## Installed Packages and Features 
 
 - i18next
