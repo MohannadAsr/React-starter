@@ -18,7 +18,7 @@ function App() {
 
   return (
     <>
-      <div className=" h-full">
+      <div className=" h-full" style={{ height: '100vh' }}>
         <NavBar />
         <div
           onClick={() =>

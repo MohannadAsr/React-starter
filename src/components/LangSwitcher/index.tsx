@@ -1,19 +1,18 @@
 import { Icon } from '@iconify/react/dist/iconify.js';
-import { useTranslation } from 'react-i18next';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 function LangSwitcher() {
   const { i18n, t } = useTranslation();
 
   const changeLang = () => {
     i18n.changeLanguage(i18n.language === 'en' ? 'ar' : 'en');
-    changeHTML(i18n.language);
     localStorage.setItem('current-lang', JSON.stringify(i18n.language));
   };
 
   React.useEffect(() => {
     changeHTML(i18n.language);
-  }, []);
+  }, [i18n.language]);
 
   const changeHTML = (lang: string) => {
     document.documentElement.lang = lang;
