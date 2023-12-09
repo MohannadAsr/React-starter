@@ -1,10 +1,14 @@
 import { useTranslation } from 'react-i18next';
-import { Route, Routes } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import './styles/global.scss';
+import Carousel from '@components/Carousel/Carousel';
+import React from 'react';
 
 function App() {
   const { t, i18n } = useTranslation();
+  const [imagee, setImagee] = React.useState<'fit' | 'cover' | 'contain'>(
+    'contain'
+  );
   const router = [
     {
       path: '/',
@@ -18,7 +22,7 @@ function App() {
 
   return (
     <>
-      <div className=" h-full" style={{ height: '100vh' }}>
+      <div>
         <NavBar />
         <div
           onClick={() =>
@@ -30,20 +34,27 @@ function App() {
             {t('Welcome to React')}
           </h1>
         </div>
-        <Routes>
-          {router.map((item) => {
-            return (
-              <Route
-                path={item.path}
-                element={item.element}
-                key={Math.random()}
-              />
-            );
-          })}
-          <Route path="contactus" element={<NavBar />}>
-            <Route path=":id" />
-          </Route>
-        </Routes>
+        <div className=" h-screen bg-gray-100 flex justify-center items-center flex-col">
+          <div
+            className=" lg:h-3/4 lg:w-3/4 w-full 
+          "
+            onClick={() => {
+              setImagee('cover');
+            }}
+          >
+            <Carousel
+              slides={[
+                ...Array.from({ length: 8 }).map(
+                  (item, index) => `poster${index + 1}.jpg`
+                ),
+                'https://riskinfo.com.au/resource-centre/files/2019/11/test-img.jpg',
+              ]}
+              SlideView={2}
+              key={1}
+              imgSize={imagee}
+            />
+          </div>
+        </div>
       </div>
     </>
   );
