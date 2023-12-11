@@ -83,9 +83,9 @@ function Carousel(options: options) {
               <img
                 className={` ${
                   optionsData.imgSize
-                    ? `object-${optionsData.imgSize}`
-                    : 'object-cover'
-                }   lg:w-1/2 sm:w-full  ${
+                    ? `lg:object-${optionsData.imgSize}`
+                    : 'lg:object-cover'
+                }   lg:w-6/12 sm:object-contain sm:w-full  ${
                   optionsData.slides?.length == 1 && 'lg:w-full'
                 }`}
                 src={item.match(/https|https/) ? item : `/${item}`}

@@ -3,27 +3,27 @@ import NavBar from './components/NavBar';
 import './styles/global.scss';
 import Carousel from '@components/Carousel/Carousel';
 import React from 'react';
+import FileUploader from '@components/FileUploader/FileUploader';
+import { Pagination, usePagination } from './hooks/usePagination';
 
 function App() {
   const { t, i18n } = useTranslation();
-  const [imagee, setImagee] = React.useState<'fit' | 'cover' | 'contain'>(
-    'contain'
-  );
-  const router = [
-    {
-      path: '/',
-      element: <div></div>,
-    },
-    {
-      path: 'contactus:id',
-      element: <NavBar />,
-    },
-  ];
+  const [image, setImage] = React.useState<File | File[]>([]);
+
+  const { pagination: AppPagination, SetPagination: SetAppPagination } =
+    usePagination();
+
+  React.useEffect(() => {
+    SetAppPagination((prev) => {
+      return { ...prev, pageIndex: 2 };
+    });
+  }, []);
 
   return (
     <>
       <div>
         <NavBar />
+        {AppPagination.pageIndex}
         <div
           onClick={() =>
             i18n.changeLanguage(i18n.language == 'ar' ? 'en' : 'ar')
@@ -36,11 +36,8 @@ function App() {
         </div>
         <div className=" h-screen bg-gray-100 flex justify-center items-center flex-col">
           <div
-            className=" lg:h-3/4 lg:w-3/4 w-full 
+            className=" w-1/2 h-1/2 
           "
-            onClick={() => {
-              setImagee('cover');
-            }}
           >
             <Carousel
               slides={[
@@ -49,10 +46,17 @@ function App() {
                 ),
                 'https://riskinfo.com.au/resource-centre/files/2019/11/test-img.jpg',
               ]}
-              SlideView={2}
+              SlideView={6}
               key={1}
-              imgSize={imagee}
+              imgSize="contain"
             />
+            {/* {image && image?.name.split('.')[0]} */}
+            {/* <FileUploader
+              value={image}
+              setFile={setImage}
+              multiple
+              maxFiles={2}
+            /> */}
           </div>
         </div>
       </div>
